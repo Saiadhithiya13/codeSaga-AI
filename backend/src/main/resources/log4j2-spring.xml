@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    CodeSage AI — Log4j2 Async Logging Configuration
+    Uses LMAX Disruptor for non-blocking async logging (add log4j2.async=true to JVM args for full async).
+    Profile-specific log levels are set in application-*.yml; this file controls appender structure.
+-->
+<Configuration status="WARN" monitorInterval="30">
+
+    <Properties>
+        <Property name="LOG_DIR">logs</Property>
+        <Property name="APP_NAME">codesage</Property>
+        <Property name="LOG_PATTERN">
+            %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level [%X{correlationId}] %logger{36} - %msg%n
+        </Property>
+        <Property name="LOG_PATTERN_JSON">
+            {"timestamp":"%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ}","level":"%level","thread":"%t","correlationId":"%X{correlationId}","logger":"%logger{36}","message":"%enc{%msg}{JSON}","exception":"%enc{%ex}{JSON}"}%n
+        </Property>
+    </Properties>
+
+    <Appenders>
+
+        <!-- ─── Console Appender ──────────────────────────────────────────── -->
+        <!-- Human-readable in dev; switched to JSON in prod via spring profile -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+
+        <!-- ─── Console JSON Appender (prod) ─────────────────────────────── -->
+        <Console name="ConsoleJson" target="SYSTEM_OUT">
+            <PatternLayout pattern="${LOG_PATTERN_JSON}"/>
+        </Console>
+
+        <!-- ─── Rolling File Appender — Application Logs ─────────────────── -->
+        <RollingFile name="RollingFile"
+                     fileName="${LOG_DIR}/${APP_NAME}.log"
+                     filePattern="${LOG_DIR}/${APP_NAME}-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>   <!-- Daily roll -->
+                <SizeBasedTriggeringPolicy size="100MB"/>                    <!-- Roll at 100MB -->
+            </Policies>
+            <DefaultRolloverStrategy max="30">                               <!-- Keep 30 days -->
+                <Delete basePath="${LOG_DIR}" maxDepth="1">
+                    <IfLastModified age="30d"/>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+
+        <!-- ─── Rolling File Appender — Error Logs (separate file) ──────── -->
+        <RollingFile name="ErrorFile"
+                     fileName="${LOG_DIR}/${APP_NAME}-error.log"
+                     filePattern="${LOG_DIR}/${APP_NAME}-error-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="50MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="30"/>
+        </RollingFile>
+
+        <!-- ─── Async Wrapper — wraps all file appenders for non-blocking I/O -->
+        <Async name="AsyncRollingFile">
+            <AppenderRef ref="RollingFile"/>
+        </Async>
+
+        <Async name="AsyncErrorFile">
+            <AppenderRef ref="ErrorFile"/>
+        </Async>
+
+    </Appenders>
+
+    <Loggers>
+
+        <!-- ─── Application Loggers ──────────────────────────────────────── -->
+        <Logger name="com.codesage" level="DEBUG" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="AsyncRollingFile"/>
+            <AppenderRef ref="AsyncErrorFile"/>
+        </Logger>
+
+        <!-- ─── Spring Framework ─────────────────────────────────────────── -->
+        <Logger name="org.springframework" level="INFO" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="AsyncRollingFile"/>
+        </Logger>
+
+        <!-- ─── Spring Security ──────────────────────────────────────────── -->
+        <Logger name="org.springframework.security" level="INFO" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="AsyncRollingFile"/>
+        </Logger>
+
+        <!-- ─── Hibernate SQL (verbose in dev only — controlled via application-dev.yml) -->
+        <Logger name="org.hibernate.SQL" level="WARN" additivity="false">
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+        <!-- ─── Flyway ───────────────────────────────────────────────────── -->
+        <Logger name="org.flywaydb" level="INFO" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="AsyncRollingFile"/>
+        </Logger>
+
+        <!-- ─── Redis / Lettuce ──────────────────────────────────────────── -->
+        <Logger name="io.lettuce" level="WARN" additivity="false">
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+        <!-- ─── Root ─────────────────────────────────────────────────────── -->
+        <Root level="WARN">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="AsyncRollingFile"/>
+            <AppenderRef ref="AsyncErrorFile"/>
+        </Root>
+
+    </Loggers>
+
+</Configuration>

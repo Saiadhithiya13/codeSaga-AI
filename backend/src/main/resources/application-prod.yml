@@ -1,0 +1,88 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# CodeSage AI — Production Profile Configuration
+# ALL sensitive values MUST be provided via environment variables.
+# No fallback defaults — missing vars cause startup failure (fail-fast).
+# ─────────────────────────────────────────────────────────────────────────────
+
+spring:
+
+  # ─── PostgreSQL ────────────────────────────────────────────────────────────
+  datasource:
+    url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      pool-name: CodeSage-HikariCP-Prod
+      maximum-pool-size: 20
+      minimum-idle: 5
+      idle-timeout: 600000        # 10 min
+      connection-timeout: 30000   # 30 sec
+      max-lifetime: 1800000       # 30 min
+      connection-test-query: SELECT 1
+      leak-detection-threshold: 60000  # Detect connection leaks
+
+  # ─── JPA / Hibernate ───────────────────────────────────────────────────────
+  jpa:
+    hibernate:
+      ddl-auto: none              # Flyway owns ALL schema changes in prod
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+
+  # ─── Redis ─────────────────────────────────────────────────────────────────
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD}
+      timeout: 2000ms
+      lettuce:
+        pool:
+          max-active: 10
+          max-idle: 5
+          min-idle: 2
+          max-wait: 2000ms
+
+  # ─── Flyway ────────────────────────────────────────────────────────────────
+  flyway:
+    baseline-on-migrate: false    # Never baseline in prod — explicit migrations only
+    validate-on-migrate: true     # Fail fast on schema mismatch
+
+  # ─── Virtual Threads ─────────────────────────────────────────────────────
+  threads:
+    virtual:
+      enabled: true
+
+# ─── Server ──────────────────────────────────────────────────────────────────
+server:
+  port: ${SERVER_PORT:8080}
+
+# ─── Actuator ────────────────────────────────────────────────────────────────
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info      # Minimal exposure in prod
+  endpoint:
+    health:
+      show-details: never         # Don't leak infrastructure details publicly
+
+# ─── Logging ─────────────────────────────────────────────────────────────────
+logging:
+  level:
+    com.codesage: INFO
+    org.springframework: WARN
+    org.flywaydb: INFO
+
+# ─── App ─────────────────────────────────────────────────────────────────────
+app:
+  cors:
+    allowed-origins: ${APP_CORS_ALLOWED_ORIGINS}
+
+# ─── ChromaDB ────────────────────────────────────────────────────────────────
+chroma:
+  host: ${CHROMA_HOST}
+  port: ${CHROMA_PORT:8000}
+  collection-name: ${CHROMA_COLLECTION:codesage_vectors}

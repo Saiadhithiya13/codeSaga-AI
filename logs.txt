@@ -1,0 +1,1000 @@
+        r1_0.id,
+        r1_0.created_at,
+        r1_0.default_branch,
+        r1_0.description,
+        r1_0.forks_count,
+        r1_0.full_name,
+        r1_0.github_repo_id,
+        r1_0.indexing_status,
+        r1_0.is_private,
+        r1_0.language,
+        r1_0.last_synced_at,
+        r1_0.name,
+        r1_0.open_issues_count,
+        r1_0.stars_count,
+        r1_0.updated_at,
+        r1_0.user_id 
+    from
+        repositories r1_0 
+    left join
+        users u1_0 
+            on u1_0.id=r1_0.user_id 
+    where
+        r1_0.id=? 
+        and u1_0.id=?
+2026-06-08 12:40:39.144 [tomcat-handler-34] TRACE [] org.hibernate.orm.jdbc.bind - binding parameter (1:UUID) <- [be230c8b-ddd1-4240-a7a5-8f078df801be]
+2026-06-08 12:40:39.145 [tomcat-handler-34] TRACE [] org.hibernate.orm.jdbc.bind - binding parameter (2:UUID) <- [57db9884-ffe3-4515-8edb-9d2a07ed1598]
+2026-06-08 12:40:39.148 [tomcat-handler-35] DEBUG [] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.created_at,
+        r1_0.default_branch,
+        r1_0.description,
+        r1_0.forks_count,
+        r1_0.full_name,
+        r1_0.github_repo_id,
+        r1_0.indexing_status,
+        r1_0.is_private,
+        r1_0.language,
+        r1_0.last_synced_at,
+        r1_0.name,
+        r1_0.open_issues_count,
+        r1_0.stars_count,
+        r1_0.updated_at,
+        r1_0.user_id 
+    from
+        repositories r1_0 
+    left join
+        users u1_0 
+            on u1_0.id=r1_0.user_id 
+    where
+        r1_0.id=? 
+        and u1_0.id=?
+2026-06-08 12:40:39.149 [tomcat-handler-35] TRACE [] org.hibernate.orm.jdbc.bind - binding parameter (1:UUID) <- [be230c8b-ddd1-4240-a7a5-8f078df801be]
+2026-06-08 12:40:39.149 [tomcat-handler-35] TRACE [] org.hibernate.orm.jdbc.bind - binding parameter (2:UUID) <- [57db9884-ffe3-4515-8edb-9d2a07ed1598]
+2026-06-08 12:40:39.152 [tomcat-handler-36] DEBUG [] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.created_at,
+        r1_0.default_branch,
+        r1_0.description,
+        r1_0.forks_count,
+        r1_0.full_name,
+        r1_0.github_repo_id,
+        r1_0.indexing_status,
+        r1_0.is_private,
+        r1_0.language,
+        r1_0.last_synced_at,
+        r1_0.name,
+        r1_0.open_issues_count,
+        r1_0.stars_count,
+        r1_0.updated_at,
+        r1_0.user_id 
+    from
+        repositories r1_0 
+    left join
+        users u1_0 
+            on u1_0.id=r1_0.user_id 
+    where
+        r1_0.id=? 
+        and u1_0.id=?
+2026-06-08 12:40:39.152 [tomcat-handler-36] TRACE [] org.hibernate.orm.jdbc.bind - binding parameter (1:UUID) <- [be230c8b-ddd1-4240-a7a5-8f078df801be]
+2026-06-08 12:40:39.153 [tomcat-handler-36] TRACE [] org.hibernate.orm.jdbc.bind - binding parameter (2:UUID) <- [57db9884-ffe3-4515-8edb-9d2a07ed1598]
+2026-06-08 12:40:39.160 [tomcat-handler-35] DEBUG [] org.hibernate.SQL - 
+    select
+        rc1_0.id,
+        rc1_0.avatar_url,
+        rc1_0.contributions,
+        rc1_0.created_at,
+        rc1_0.repository_id,
+        rc1_0.username 
+    from
+        repository_contributors rc1_0 
+    left join
+        repositories r1_0 
+            on r1_0.id=rc1_0.repository_id 
+    where
+        r1_0.id=? 
+    order by
+        rc1_0.contributions desc
+2026-06-08 12:40:39.161 [tomcat-handler-36] DEBUG [] org.hibernate.SQL - 
+    select
+        rm1_0.id,
+        rm1_0.contributor_count,
+        rm1_0.forks_count,
+        rm1_0.open_issue_count,
+        rm1_0.open_pr_count,
+        rm1_0.recorded_at,
+        rm1_0.repository_id,
+        rm1_0.stars_count 
+    from
+        repository_metrics rm1_0 
+    left join
+        repositories r1_0 
+            on r1_0.id=rm1_0.repository_id 
+    where
+        r1_0.id=? 
+    order by
+        rm1_0.recorded_at
+2026-06-08 12:40:39.161 [tomcat-handler-35] TRACE [] org.hibernate.orm.jdbc.bind - binding parameter (1:UUID) <- [be230c8b-ddd1-4240-a7a5-8f078df801be]
+2026-06-08 12:40:39.161 [tomcat-handler-36] TRACE [] org.hibernate.orm.jdbc.bind - binding parameter (1:UUID) <- [be230c8b-ddd1-4240-a7a5-8f078df801be]
+2026-06-08 12:40:39.180 [tomcat-handler-37] DEBUG [] org.springframework.security.web.FilterChainProxy - Securing GET /api/v1/repositories/be230c8b-ddd1-4240-a7a5-8f078df801be
+2026-06-08 12:40:39.188 [tomcat-handler-37] DEBUG [] com.codesage.security.jwt.JwtAuthenticationFilter - Authenticated user [Saiadhithiya13] for request [/api/v1/repositories/be230c8b-ddd1-4240-a7a5-8f078df801be]
+2026-06-08 12:40:39.189 [tomcat-handler-37] DEBUG [] org.springframework.security.web.FilterChainProxy - Secured GET /api/v1/repositories/be230c8b-ddd1-4240-a7a5-8f078df801be
+2026-06-08 12:40:39.194 [tomcat-handler-38] DEBUG [] org.springframework.security.web.FilterChainProxy - Securing GET /api/v1/repositories/be230c8b-ddd1-4240-a7a5-8f078df801be/contributors
+2026-06-08 12:40:39.195 [tomcat-handler-37] DEBUG [] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.created_at,
+        r1_0.default_branch,
+        r1_0.description,
+        r1_0.forks_count,
+        r1_0.full_name,
+        r1_0.github_repo_id,
+        r1_0.indexing_status,
+        r1_0.is_private,
+        r1_0.language,
+        r1_0.last_synced_at,
+        r1_0.name,
+        r1_0.open_issues_count,
+        r1_0.stars_count,
+        r1_0.updated_at,
+        r1_0.user_id 
+    from
+        repositories r1_0 
+    left join
+        users u1_0 
+            on u1_0.id=r1_0.user_id 
+    where
+        r1_0.id=? 
+        and u1_0.id=?
+2026-06-08 12:40:39.195 [tomcat-handler-37] TRACE [] org.hibernate.orm.jdbc.bind - binding parameter (1:UUID) <- [be230c8b-ddd1-4240-a7a5-8f078df801be]
+2026-06-08 12:40:39.195 [tomcat-handler-37] TRACE [] org.hibernate.orm.jdbc.bind - binding parameter (2:UUID) <- [57db9884-ffe3-4515-8edb-9d2a07ed1598]
+2026-06-08 12:40:39.196 [tomcat-handler-38] DEBUG [] com.codesage.security.jwt.JwtAuthenticationFilter - Authenticated user [Saiadhithiya13] for request [/api/v1/repositories/be230c8b-ddd1-4240-a7a5-8f078df801be/contributors]
+2026-06-08 12:40:39.197 [tomcat-handler-38] DEBUG [] org.springframework.security.web.FilterChainProxy - Secured GET /api/v1/repositories/be230c8b-ddd1-4240-a7a5-8f078df801be/contributors
+2026-06-08 12:40:39.198 [tomcat-handler-39] DEBUG [] org.springframework.security.web.FilterChainProxy - Securing GET /api/v1/repositories/be230c8b-ddd1-4240-a7a5-8f078df801be/metrics
+2026-06-08 12:40:39.200 [tomcat-handler-39] DEBUG [] com.codesage.security.jwt.JwtAuthenticationFilter - Authenticated user [Saiadhithiya13] for request [/api/v1/repositories/be230c8b-ddd1-4240-a7a5-8f078df801be/metrics]
+2026-06-08 12:40:39.201 [tomcat-handler-38] DEBUG [] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.created_at,
+        r1_0.default_branch,
+        r1_0.description,
+        r1_0.forks_count,
+        r1_0.full_name,
+        r1_0.github_repo_id,
+        r1_0.indexing_status,
+        r1_0.is_private,
+        r1_0.language,
+        r1_0.last_synced_at,
+        r1_0.name,
+        r1_0.open_issues_count,
+        r1_0.stars_count,
+        r1_0.updated_at,
+        r1_0.user_id 
+    from
+        repositories r1_0 
+    left join
+        users u1_0 
+            on u1_0.id=r1_0.user_id 
+    where
+        r1_0.id=? 
+        and u1_0.id=?
+2026-06-08 12:40:39.201 [tomcat-handler-39] DEBUG [] org.springframework.security.web.FilterChainProxy - Secured GET /api/v1/repositories/be230c8b-ddd1-4240-a7a5-8f078df801be/metrics
+2026-06-08 12:40:39.201 [tomcat-handler-38] TRACE [] org.hibernate.orm.jdbc.bind - binding parameter (1:UUID) <- [be230c8b-ddd1-4240-a7a5-8f078df801be]
+2026-06-08 12:40:39.202 [tomcat-handler-38] TRACE [] org.hibernate.orm.jdbc.bind - binding parameter (2:UUID) <- [57db9884-ffe3-4515-8edb-9d2a07ed1598]
+2026-06-08 12:40:39.206 [tomcat-handler-39] DEBUG [] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.created_at,
+        r1_0.default_branch,
+        r1_0.description,
+        r1_0.forks_count,
+        r1_0.full_name,
+        r1_0.github_repo_id,
+        r1_0.indexing_status,
+        r1_0.is_private,
+        r1_0.language,
+        r1_0.last_synced_at,
+        r1_0.name,
+        r1_0.open_issues_count,
+        r1_0.stars_count,
+        r1_0.updated_at,
+        r1_0.user_id 
+    from
+        repositories r1_0 
+    left join
+        users u1_0 
+            on u1_0.id=r1_0.user_id 
+    where
+        r1_0.id=? 
+        and u1_0.id=?
+2026-06-08 12:40:39.206 [tomcat-handler-39] TRACE [] org.hibernate.orm.jdbc.bind - binding parameter (1:UUID) <- [be230c8b-ddd1-4240-a7a5-8f078df801be]
+2026-06-08 12:40:39.207 [tomcat-handler-39] TRACE [] org.hibernate.orm.jdbc.bind - binding parameter (2:UUID) <- [57db9884-ffe3-4515-8edb-9d2a07ed1598]
+2026-06-08 12:40:39.208 [tomcat-handler-38] DEBUG [] org.hibernate.SQL - 
+    select
+        rc1_0.id,
+        rc1_0.avatar_url,
+        rc1_0.contributions,
+        rc1_0.created_at,
+        rc1_0.repository_id,
+        rc1_0.username 
+    from
+        repository_contributors rc1_0 
+    left join
+        repositories r1_0 
+            on r1_0.id=rc1_0.repository_id 
+    where
+        r1_0.id=? 
+    order by
+        rc1_0.contributions desc
+2026-06-08 12:40:39.208 [tomcat-handler-38] TRACE [] org.hibernate.orm.jdbc.bind - binding parameter (1:UUID) <- [be230c8b-ddd1-4240-a7a5-8f078df801be]
+2026-06-08 12:40:39.212 [tomcat-handler-39] DEBUG [] org.hibernate.SQL - 
+    select
+        rm1_0.id,
+        rm1_0.contributor_count,
+        rm1_0.forks_count,
+        rm1_0.open_issue_count,
+        rm1_0.open_pr_count,
+        rm1_0.recorded_at,
+        rm1_0.repository_id,
+        rm1_0.stars_count 
+    from
+        repository_metrics rm1_0 
+    left join
+        repositories r1_0 
+            on r1_0.id=rm1_0.repository_id 
+    where
+        r1_0.id=? 
+    order by
+        rm1_0.recorded_at
+2026-06-08 12:40:39.212 [tomcat-handler-39] TRACE [] org.hibernate.orm.jdbc.bind - binding parameter (1:UUID) <- [be230c8b-ddd1-4240-a7a5-8f078df801be]
+2026-06-08 12:40:43.039 [tomcat-handler-40] DEBUG [] org.springframework.security.web.FilterChainProxy - Securing POST /api/v1/chat/sessions
+2026-06-08 12:40:43.042 [tomcat-handler-40] DEBUG [] com.codesage.security.jwt.JwtAuthenticationFilter - Authenticated user [Saiadhithiya13] for request [/api/v1/chat/sessions]
+2026-06-08 12:40:43.043 [tomcat-handler-40] DEBUG [] org.springframework.security.web.FilterChainProxy - Secured POST /api/v1/chat/sessions
+2026-06-08 12:40:43.046 [tomcat-handler-40] DEBUG [] org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.github_access_token,
+        u1_0.github_id,
+        u1_0.is_active,
+        u1_0.last_login_at,
+        u1_0.login,
+        u1_0.name,
+        u1_0.role,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+2026-06-08 12:40:43.046 [tomcat-handler-40] TRACE [] org.hibernate.orm.jdbc.bind - binding parameter (1:UUID) <- [57db9884-ffe3-4515-8edb-9d2a07ed1598]
+2026-06-08 12:40:43.049 [tomcat-handler-40] DEBUG [] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.created_at,
+        r1_0.default_branch,
+        r1_0.description,
+        r1_0.forks_count,
+        r1_0.full_name,
+        r1_0.github_repo_id,
+        r1_0.indexing_status,
+        r1_0.is_private,
+        r1_0.language,
+        r1_0.last_synced_at,
+        r1_0.name,
+        r1_0.open_issues_count,
+        r1_0.stars_count,
+        r1_0.updated_at,
+        r1_0.user_id 
+    from
+        repositories r1_0 
+    left join
+        users u1_0 
+            on u1_0.id=r1_0.user_id 
+    where
+        r1_0.id=? 
+        and u1_0.id=?
+2026-06-08 12:40:43.050 [tomcat-handler-40] TRACE [] org.hibernate.orm.jdbc.bind - binding parameter (1:UUID) <- [be230c8b-ddd1-4240-a7a5-8f078df801be]
+2026-06-08 12:40:43.050 [tomcat-handler-40] TRACE [] org.hibernate.orm.jdbc.bind - binding parameter (2:UUID) <- [57db9884-ffe3-4515-8edb-9d2a07ed1598]
+2026-06-08 12:40:43.053 [tomcat-handler-40] DEBUG [] org.hibernate.SQL - 
+    insert 
+    into
+        chat_sessions
+        (created_at, repository_id, title, updated_at, user_id, id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2026-06-08 12:40:43.053 [tomcat-handler-40] TRACE [] org.hibernate.orm.jdbc.bind - binding parameter (1:TIMESTAMP_UTC) <- [2026-06-08T12:40:43.052599616Z]
+2026-06-08 12:40:43.054 [tomcat-handler-40] TRACE [] org.hibernate.orm.jdbc.bind - binding parameter (2:UUID) <- [be230c8b-ddd1-4240-a7a5-8f078df801be]
+2026-06-08 12:40:43.054 [tomcat-handler-40] TRACE [] org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [New Chat Session]
+2026-06-08 12:40:43.054 [tomcat-handler-40] TRACE [] org.hibernate.orm.jdbc.bind - binding parameter (4:TIMESTAMP_UTC) <- [2026-06-08T12:40:43.052599616Z]
+2026-06-08 12:40:43.054 [tomcat-handler-40] TRACE [] org.hibernate.orm.jdbc.bind - binding parameter (5:UUID) <- [57db9884-ffe3-4515-8edb-9d2a07ed1598]
+2026-06-08 12:40:43.054 [tomcat-handler-40] TRACE [] org.hibernate.orm.jdbc.bind - binding parameter (6:UUID) <- [f177f87e-cefa-4ecd-b067-55b531e0c6b2]
+2026-06-08 12:40:47.528 [tomcat-handler-41] DEBUG [] org.springframework.security.web.FilterChainProxy - Securing POST /api/v1/chat/sessions/f177f87e-cefa-4ecd-b067-55b531e0c6b2/messages/stream
+2026-06-08 12:40:47.534 [tomcat-handler-41] DEBUG [] com.codesage.security.jwt.JwtAuthenticationFilter - Authenticated user [Saiadhithiya13] for request [/api/v1/chat/sessions/f177f87e-cefa-4ecd-b067-55b531e0c6b2/messages/stream]
+2026-06-08 12:40:47.535 [tomcat-handler-41] DEBUG [] org.springframework.security.web.FilterChainProxy - Secured POST /api/v1/chat/sessions/f177f87e-cefa-4ecd-b067-55b531e0c6b2/messages/stream
+2026-06-08 12:40:47.541 [tomcat-handler-41] DEBUG [] org.hibernate.SQL - 
+    select
+        cs1_0.id,
+        cs1_0.created_at,
+        cs1_0.repository_id,
+        cs1_0.title,
+        cs1_0.updated_at,
+        cs1_0.user_id 
+    from
+        chat_sessions cs1_0 
+    where
+        cs1_0.id=? 
+        and cs1_0.user_id=?
+2026-06-08 12:40:47.541 [tomcat-handler-41] TRACE [] org.hibernate.orm.jdbc.bind - binding parameter (1:UUID) <- [f177f87e-cefa-4ecd-b067-55b531e0c6b2]
+2026-06-08 12:40:47.542 [tomcat-handler-41] TRACE [] org.hibernate.orm.jdbc.bind - binding parameter (2:UUID) <- [57db9884-ffe3-4515-8edb-9d2a07ed1598]
+2026-06-08 12:40:47.548 [] INFO  [] com.codesage.domain.repos.service.embedding.SemanticSearchService - Executing semantic search for repository be230c8b-ddd1-4240-a7a5-8f078df801be: 'Hi'
+2026-06-08 12:40:47.549 [tomcat-handler-41] DEBUG [] org.hibernate.SQL - 
+    insert 
+    into
+        chat_messages
+        (content, created_at, role, session_id, token_count, id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2026-06-08 12:40:47.550 [tomcat-handler-41] TRACE [] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Hi]
+2026-06-08 12:40:47.551 [tomcat-handler-41] TRACE [] org.hibernate.orm.jdbc.bind - binding parameter (2:TIMESTAMP_UTC) <- [2026-06-08T12:40:47.546258444Z]
+2026-06-08 12:40:47.552 [tomcat-handler-41] TRACE [] org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [USER]
+2026-06-08 12:40:47.552 [tomcat-handler-41] TRACE [] org.hibernate.orm.jdbc.bind - binding parameter (4:UUID) <- [f177f87e-cefa-4ecd-b067-55b531e0c6b2]
+2026-06-08 12:40:47.553 [tomcat-handler-41] TRACE [] org.hibernate.orm.jdbc.bind - binding parameter (5:INTEGER) <- [0]
+2026-06-08 12:40:47.554 [tomcat-handler-41] TRACE [] org.hibernate.orm.jdbc.bind - binding parameter (6:UUID) <- [2c236e7e-98bd-47dc-8e8f-92bdf7cad3a0]
+2026-06-08 12:40:47.558 [tomcat-handler-41] DEBUG [] org.hibernate.SQL - 
+    update
+        chat_sessions 
+    set
+        repository_id=?,
+        title=?,
+        updated_at=?,
+        user_id=? 
+    where
+        id=?
+2026-06-08 12:40:47.559 [tomcat-handler-41] TRACE [] org.hibernate.orm.jdbc.bind - binding parameter (1:UUID) <- [be230c8b-ddd1-4240-a7a5-8f078df801be]
+2026-06-08 12:40:47.559 [tomcat-handler-41] TRACE [] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [New Chat Session]
+2026-06-08 12:40:47.560 [tomcat-handler-41] TRACE [] org.hibernate.orm.jdbc.bind - binding parameter (3:TIMESTAMP_UTC) <- [2026-06-08T12:40:47.548605894Z]
+2026-06-08 12:40:47.560 [tomcat-handler-41] TRACE [] org.hibernate.orm.jdbc.bind - binding parameter (4:UUID) <- [57db9884-ffe3-4515-8edb-9d2a07ed1598]
+2026-06-08 12:40:47.560 [tomcat-handler-41] TRACE [] org.hibernate.orm.jdbc.bind - binding parameter (5:UUID) <- [f177f87e-cefa-4ecd-b067-55b531e0c6b2]
+2026-06-08 12:40:48.075 [] WARN  [] dev.langchain4j.internal.RetryUtils - A retriable exception occurred. Remaining retries: 2 of 2
+java.lang.RuntimeException: HTTP error (400): {
+  "error": {
+    "code": 400,
+    "message": "API key not valid. Please pass a valid API key.",
+    "status": "INVALID_ARGUMENT",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+        "reason": "API_KEY_INVALID",
+        "domain": "googleapis.com",
+        "metadata": {
+          "service": "generativelanguage.googleapis.com"
+        }
+      },
+      {
+        "@type": "type.googleapis.com/google.rpc.LocalizedMessage",
+        "locale": "en-US",
+        "message": "API key not valid. Please pass a valid API key."
+      }
+    ]
+  }
+}
+
+	at dev.langchain4j.model.googleai.GeminiService.sendRequest(GeminiService.java:69) ~[langchain4j-google-ai-gemini-1.0.0-beta5.jar!/:?]
+	at dev.langchain4j.model.googleai.GeminiService.embed(GeminiService.java:46) ~[langchain4j-google-ai-gemini-1.0.0-beta5.jar!/:?]
+	at dev.langchain4j.model.googleai.GoogleAiEmbeddingModel.lambda$embed$0(GoogleAiEmbeddingModel.java:72) ~[langchain4j-google-ai-gemini-1.0.0-beta5.jar!/:?]
+	at dev.langchain4j.internal.ExceptionMapper.withExceptionMapper(ExceptionMapper.java:29) ~[langchain4j-core-1.0.0.jar!/:?]
+	at dev.langchain4j.internal.RetryUtils.lambda$withRetryMappingExceptions$2(RetryUtils.java:324) ~[langchain4j-core-1.0.0.jar!/:?]
+	at dev.langchain4j.internal.RetryUtils$RetryPolicy.withRetry(RetryUtils.java:211) [langchain4j-core-1.0.0.jar!/:?]
+	at dev.langchain4j.internal.RetryUtils.withRetry(RetryUtils.java:264) [langchain4j-core-1.0.0.jar!/:?]
+	at dev.langchain4j.internal.RetryUtils.withRetryMappingExceptions(RetryUtils.java:324) [langchain4j-core-1.0.0.jar!/:?]
+	at dev.langchain4j.internal.RetryUtils.withRetryMappingExceptions(RetryUtils.java:308) [langchain4j-core-1.0.0.jar!/:?]
+	at dev.langchain4j.model.googleai.GoogleAiEmbeddingModel.embed(GoogleAiEmbeddingModel.java:72) [langchain4j-google-ai-gemini-1.0.0-beta5.jar!/:?]
+	at dev.langchain4j.model.googleai.GoogleAiEmbeddingModel.embed(GoogleAiEmbeddingModel.java:83) [langchain4j-google-ai-gemini-1.0.0-beta5.jar!/:?]
+	at com.codesage.domain.repos.service.embedding.SemanticSearchService.search(SemanticSearchService.java:36) [!/:1.0.0-SNAPSHOT]
+	at com.codesage.domain.chat.service.RepositoryChatService.executeRagFlow(RepositoryChatService.java:131) [!/:1.0.0-SNAPSHOT]
+	at com.codesage.domain.chat.service.RepositoryChatService.lambda$streamMessage$0(RepositoryChatService.java:122) [!/:1.0.0-SNAPSHOT]
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source) [?:?]
+	at java.base/java.util.concurrent.FutureTask.run(Unknown Source) [?:?]
+	at java.base/java.lang.VirtualThread.run(Unknown Source) [?:?]
+2026-06-08 12:40:48.773 [] WARN  [] dev.langchain4j.internal.RetryUtils - A retriable exception occurred. Remaining retries: 1 of 2
+java.lang.RuntimeException: HTTP error (400): {
+  "error": {
+    "code": 400,
+    "message": "API key not valid. Please pass a valid API key.",
+    "status": "INVALID_ARGUMENT",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+        "reason": "API_KEY_INVALID",
+        "domain": "googleapis.com",
+        "metadata": {
+          "service": "generativelanguage.googleapis.com"
+        }
+      },
+      {
+        "@type": "type.googleapis.com/google.rpc.LocalizedMessage",
+        "locale": "en-US",
+        "message": "API key not valid. Please pass a valid API key."
+      }
+    ]
+  }
+}
+
+	at dev.langchain4j.model.googleai.GeminiService.sendRequest(GeminiService.java:69) ~[langchain4j-google-ai-gemini-1.0.0-beta5.jar!/:?]
+	at dev.langchain4j.model.googleai.GeminiService.embed(GeminiService.java:46) ~[langchain4j-google-ai-gemini-1.0.0-beta5.jar!/:?]
+	at dev.langchain4j.model.googleai.GoogleAiEmbeddingModel.lambda$embed$0(GoogleAiEmbeddingModel.java:72) ~[langchain4j-google-ai-gemini-1.0.0-beta5.jar!/:?]
+	at dev.langchain4j.internal.ExceptionMapper.withExceptionMapper(ExceptionMapper.java:29) ~[langchain4j-core-1.0.0.jar!/:?]
+	at dev.langchain4j.internal.RetryUtils.lambda$withRetryMappingExceptions$2(RetryUtils.java:324) ~[langchain4j-core-1.0.0.jar!/:?]
+	at dev.langchain4j.internal.RetryUtils$RetryPolicy.withRetry(RetryUtils.java:211) [langchain4j-core-1.0.0.jar!/:?]
+	at dev.langchain4j.internal.RetryUtils.withRetry(RetryUtils.java:264) [langchain4j-core-1.0.0.jar!/:?]
+	at dev.langchain4j.internal.RetryUtils.withRetryMappingExceptions(RetryUtils.java:324) [langchain4j-core-1.0.0.jar!/:?]
+	at dev.langchain4j.internal.RetryUtils.withRetryMappingExceptions(RetryUtils.java:308) [langchain4j-core-1.0.0.jar!/:?]
+	at dev.langchain4j.model.googleai.GoogleAiEmbeddingModel.embed(GoogleAiEmbeddingModel.java:72) [langchain4j-google-ai-gemini-1.0.0-beta5.jar!/:?]
+	at dev.langchain4j.model.googleai.GoogleAiEmbeddingModel.embed(GoogleAiEmbeddingModel.java:83) [langchain4j-google-ai-gemini-1.0.0-beta5.jar!/:?]
+	at com.codesage.domain.repos.service.embedding.SemanticSearchService.search(SemanticSearchService.java:36) [!/:1.0.0-SNAPSHOT]
+	at com.codesage.domain.chat.service.RepositoryChatService.executeRagFlow(RepositoryChatService.java:131) [!/:1.0.0-SNAPSHOT]
+	at com.codesage.domain.chat.service.RepositoryChatService.lambda$streamMessage$0(RepositoryChatService.java:122) [!/:1.0.0-SNAPSHOT]
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source) [?:?]
+	at java.base/java.util.concurrent.FutureTask.run(Unknown Source) [?:?]
+	at java.base/java.lang.VirtualThread.run(Unknown Source) [?:?]
+2026-06-08 12:40:49.676 [] ERROR [] com.codesage.domain.chat.service.RepositoryChatService - Exception during RAG flow
+java.lang.RuntimeException: HTTP error (400): {
+  "error": {
+    "code": 400,
+    "message": "API key not valid. Please pass a valid API key.",
+    "status": "INVALID_ARGUMENT",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+        "reason": "API_KEY_INVALID",
+        "domain": "googleapis.com",
+        "metadata": {
+          "service": "generativelanguage.googleapis.com"
+        }
+      },
+      {
+        "@type": "type.googleapis.com/google.rpc.LocalizedMessage",
+        "locale": "en-US",
+        "message": "API key not valid. Please pass a valid API key."
+      }
+    ]
+  }
+}
+
+	at dev.langchain4j.model.googleai.GeminiService.sendRequest(GeminiService.java:69) ~[langchain4j-google-ai-gemini-1.0.0-beta5.jar!/:?]
+	at dev.langchain4j.model.googleai.GeminiService.embed(GeminiService.java:46) ~[langchain4j-google-ai-gemini-1.0.0-beta5.jar!/:?]
+	at dev.langchain4j.model.googleai.GoogleAiEmbeddingModel.lambda$embed$0(GoogleAiEmbeddingModel.java:72) ~[langchain4j-google-ai-gemini-1.0.0-beta5.jar!/:?]
+	at dev.langchain4j.internal.ExceptionMapper.withExceptionMapper(ExceptionMapper.java:29) ~[langchain4j-core-1.0.0.jar!/:?]
+	at dev.langchain4j.internal.RetryUtils.lambda$withRetryMappingExceptions$2(RetryUtils.java:324) ~[langchain4j-core-1.0.0.jar!/:?]
+	at dev.langchain4j.internal.RetryUtils$RetryPolicy.withRetry(RetryUtils.java:211) ~[langchain4j-core-1.0.0.jar!/:?]
+	at dev.langchain4j.internal.RetryUtils.withRetry(RetryUtils.java:264) ~[langchain4j-core-1.0.0.jar!/:?]
+	at dev.langchain4j.internal.RetryUtils.withRetryMappingExceptions(RetryUtils.java:324) ~[langchain4j-core-1.0.0.jar!/:?]
+	at dev.langchain4j.internal.RetryUtils.withRetryMappingExceptions(RetryUtils.java:308) ~[langchain4j-core-1.0.0.jar!/:?]
+	at dev.langchain4j.model.googleai.GoogleAiEmbeddingModel.embed(GoogleAiEmbeddingModel.java:72) ~[langchain4j-google-ai-gemini-1.0.0-beta5.jar!/:?]
+	at dev.langchain4j.model.googleai.GoogleAiEmbeddingModel.embed(GoogleAiEmbeddingModel.java:83) ~[langchain4j-google-ai-gemini-1.0.0-beta5.jar!/:?]
+	at com.codesage.domain.repos.service.embedding.SemanticSearchService.search(SemanticSearchService.java:36) ~[!/:1.0.0-SNAPSHOT]
+	at com.codesage.domain.chat.service.RepositoryChatService.executeRagFlow(RepositoryChatService.java:131) [!/:1.0.0-SNAPSHOT]
+	at com.codesage.domain.chat.service.RepositoryChatService.lambda$streamMessage$0(RepositoryChatService.java:122) [!/:1.0.0-SNAPSHOT]
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source) [?:?]
+	at java.base/java.util.concurrent.FutureTask.run(Unknown Source) [?:?]
+	at java.base/java.lang.VirtualThread.run(Unknown Source) [?:?]
+2026-06-08 12:40:49.681 [tomcat-handler-42] DEBUG [] org.springframework.security.web.FilterChainProxy - Securing POST /api/v1/chat/sessions/f177f87e-cefa-4ecd-b067-55b531e0c6b2/messages/stream
+2026-06-08 12:40:49.682 [tomcat-handler-42] DEBUG [] org.springframework.security.web.FilterChainProxy - Secured POST /api/v1/chat/sessions/f177f87e-cefa-4ecd-b067-55b531e0c6b2/messages/stream
+2026-06-08 12:40:49.683 [tomcat-handler-42] ERROR [] com.codesage.exception.GlobalExceptionHandler - [87A12AF0] Unexpected error at /api/v1/chat/sessions/f177f87e-cefa-4ecd-b067-55b531e0c6b2/messages/stream: HTTP error (400): {
+  "error": {
+    "code": 400,
+    "message": "API key not valid. Please pass a valid API key.",
+    "status": "INVALID_ARGUMENT",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+        "reason": "API_KEY_INVALID",
+        "domain": "googleapis.com",
+        "metadata": {
+          "service": "generativelanguage.googleapis.com"
+        }
+      },
+      {
+        "@type": "type.googleapis.com/google.rpc.LocalizedMessage",
+        "locale": "en-US",
+        "message": "API key not valid. Please pass a valid API key."
+      }
+    ]
+  }
+}
+
+java.lang.RuntimeException: HTTP error (400): {
+  "error": {
+    "code": 400,
+    "message": "API key not valid. Please pass a valid API key.",
+    "status": "INVALID_ARGUMENT",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+        "reason": "API_KEY_INVALID",
+        "domain": "googleapis.com",
+        "metadata": {
+          "service": "generativelanguage.googleapis.com"
+        }
+      },
+      {
+        "@type": "type.googleapis.com/google.rpc.LocalizedMessage",
+        "locale": "en-US",
+        "message": "API key not valid. Please pass a valid API key."
+      }
+    ]
+  }
+}
+
+	at dev.langchain4j.model.googleai.GeminiService.sendRequest(GeminiService.java:69) ~[langchain4j-google-ai-gemini-1.0.0-beta5.jar!/:?]
+	at dev.langchain4j.model.googleai.GeminiService.embed(GeminiService.java:46) ~[langchain4j-google-ai-gemini-1.0.0-beta5.jar!/:?]
+	at dev.langchain4j.model.googleai.GoogleAiEmbeddingModel.lambda$embed$0(GoogleAiEmbeddingModel.java:72) ~[langchain4j-google-ai-gemini-1.0.0-beta5.jar!/:?]
+	at dev.langchain4j.internal.ExceptionMapper.withExceptionMapper(ExceptionMapper.java:29) ~[langchain4j-core-1.0.0.jar!/:?]
+	at dev.langchain4j.internal.RetryUtils.lambda$withRetryMappingExceptions$2(RetryUtils.java:324) ~[langchain4j-core-1.0.0.jar!/:?]
+	at dev.langchain4j.internal.RetryUtils$RetryPolicy.withRetry(RetryUtils.java:211) ~[langchain4j-core-1.0.0.jar!/:?]
+	at dev.langchain4j.internal.RetryUtils.withRetry(RetryUtils.java:264) ~[langchain4j-core-1.0.0.jar!/:?]
+	at dev.langchain4j.internal.RetryUtils.withRetryMappingExceptions(RetryUtils.java:324) ~[langchain4j-core-1.0.0.jar!/:?]
+	at dev.langchain4j.internal.RetryUtils.withRetryMappingExceptions(RetryUtils.java:308) ~[langchain4j-core-1.0.0.jar!/:?]
+	at dev.langchain4j.model.googleai.GoogleAiEmbeddingModel.embed(GoogleAiEmbeddingModel.java:72) ~[langchain4j-google-ai-gemini-1.0.0-beta5.jar!/:?]
+	at dev.langchain4j.model.googleai.GoogleAiEmbeddingModel.embed(GoogleAiEmbeddingModel.java:83) ~[langchain4j-google-ai-gemini-1.0.0-beta5.jar!/:?]
+	at com.codesage.domain.repos.service.embedding.SemanticSearchService.search(SemanticSearchService.java:36) ~[!/:1.0.0-SNAPSHOT]
+	at com.codesage.domain.chat.service.RepositoryChatService.executeRagFlow(RepositoryChatService.java:131) ~[!/:1.0.0-SNAPSHOT]
+	at com.codesage.domain.chat.service.RepositoryChatService.lambda$streamMessage$0(RepositoryChatService.java:122) ~[!/:1.0.0-SNAPSHOT]
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source) ~[?:?]
+	at java.base/java.util.concurrent.FutureTask.run(Unknown Source) ~[?:?]
+	at java.base/java.lang.VirtualThread.run(Unknown Source) [?:?]
+2026-06-08 12:40:49.685 [tomcat-handler-42] WARN  [] org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver - Failure in @ExceptionHandler com.codesage.exception.GlobalExceptionHandler#handleUnexpected(Exception, HttpServletRequest)
+org.springframework.http.converter.HttpMessageNotWritableException: No converter for [class com.codesage.common.dto.ApiResponse] with preset Content-Type 'text/event-stream'
+	at org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodProcessor.writeWithMessageConverters(AbstractMessageConverterMethodProcessor.java:365) ~[spring-webmvc-6.2.7.jar!/:6.2.7]
+	at org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor.handleReturnValue(HttpEntityMethodProcessor.java:263) ~[spring-webmvc-6.2.7.jar!/:6.2.7]
+	at org.springframework.web.method.support.HandlerMethodReturnValueHandlerComposite.handleReturnValue(HandlerMethodReturnValueHandlerComposite.java:78) ~[spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:136) ~[spring-webmvc-6.2.7.jar!/:6.2.7]
+	at org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver.doResolveHandlerMethodException(ExceptionHandlerExceptionResolver.java:471) [spring-webmvc-6.2.7.jar!/:6.2.7]
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodExceptionResolver.doResolveException(AbstractHandlerMethodExceptionResolver.java:73) [spring-webmvc-6.2.7.jar!/:6.2.7]
+	at org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver.resolveException(AbstractHandlerExceptionResolver.java:182) [spring-webmvc-6.2.7.jar!/:6.2.7]
+	at org.springframework.web.servlet.handler.HandlerExceptionResolverComposite.resolveException(HandlerExceptionResolverComposite.java:80) [spring-webmvc-6.2.7.jar!/:6.2.7]
+	at org.springframework.web.servlet.DispatcherServlet.processHandlerException(DispatcherServlet.java:1359) [spring-webmvc-6.2.7.jar!/:6.2.7]
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1161) [spring-webmvc-6.2.7.jar!/:6.2.7]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1106) [spring-webmvc-6.2.7.jar!/:6.2.7]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) [spring-webmvc-6.2.7.jar!/:6.2.7]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) [spring-webmvc-6.2.7.jar!/:6.2.7]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) [spring-webmvc-6.2.7.jar!/:6.2.7]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) [spring-webmvc-6.2.7.jar!/:6.2.7]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) [spring-web-6.2.7.jar!/:6.2.7]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) [spring-web-6.2.7.jar!/:6.2.7]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) [spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) [spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$FilterObservation$SimpleFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:479) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:340) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator.lambda$wrapSecured$0(ObservationFilterChainDecorator.java:82) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:128) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:101) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:125) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:119) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:91) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) [spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) [spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) [spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) [spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) [spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$0(ObservationFilterChainDecorator.java:323) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:224) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) [spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) [spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.web.filter.ServletRequestPathFilter.doFilter(ServletRequestPathFilter.java:52) [spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) [spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) [spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebSecurityConfiguration.java:319) [spring-security-config-6.5.0.jar!/:6.5.0]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) [spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:243) [spring-webmvc-6.2.7.jar!/:6.2.7]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) [spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) [spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:240) [spring-security-config-6.5.0.jar!/:6.5.0]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:362) [spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:278) [spring-web-6.2.7.jar!/:6.2.7]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) [spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) [spring-web-6.2.7.jar!/:6.2.7]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) [spring-web-6.2.7.jar!/:6.2.7]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:114) [spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) [spring-web-6.2.7.jar!/:6.2.7]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) [spring-web-6.2.7.jar!/:6.2.7]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.ApplicationDispatcher.invoke(ApplicationDispatcher.java:612) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.ApplicationDispatcher.doDispatch(ApplicationDispatcher.java:540) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.ApplicationDispatcher.dispatch(ApplicationDispatcher.java:511) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.AsyncContextImpl$AsyncRunnable.run(AsyncContextImpl.java:599) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.AsyncContextImpl.doInternalDispatch(AsyncContextImpl.java:342) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.connector.CoyoteAdapter.asyncDispatch(CoyoteAdapter.java:239) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.coyote.AbstractProcessor.dispatch(AbstractProcessor.java:243) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:57) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1740) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) [tomcat-embed-core-10.1.41.jar!/:?]
+	at java.base/java.lang.VirtualThread.run(Unknown Source) [?:?]
+2026-06-08 12:40:49.690 [tomcat-handler-42] DEBUG [] org.springframework.security.web.authentication.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-06-08 12:40:49.692 [tomcat-handler-42] ERROR [] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] threw exception
+java.lang.RuntimeException: HTTP error (400): {
+  "error": {
+    "code": 400,
+    "message": "API key not valid. Please pass a valid API key.",
+    "status": "INVALID_ARGUMENT",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+        "reason": "API_KEY_INVALID",
+        "domain": "googleapis.com",
+        "metadata": {
+          "service": "generativelanguage.googleapis.com"
+        }
+      },
+      {
+        "@type": "type.googleapis.com/google.rpc.LocalizedMessage",
+        "locale": "en-US",
+        "message": "API key not valid. Please pass a valid API key."
+      }
+    ]
+  }
+}
+
+	at dev.langchain4j.model.googleai.GeminiService.sendRequest(GeminiService.java:69) ~[langchain4j-google-ai-gemini-1.0.0-beta5.jar!/:?]
+	at dev.langchain4j.model.googleai.GeminiService.embed(GeminiService.java:46) ~[langchain4j-google-ai-gemini-1.0.0-beta5.jar!/:?]
+	at dev.langchain4j.model.googleai.GoogleAiEmbeddingModel.lambda$embed$0(GoogleAiEmbeddingModel.java:72) ~[langchain4j-google-ai-gemini-1.0.0-beta5.jar!/:?]
+	at dev.langchain4j.internal.ExceptionMapper.withExceptionMapper(ExceptionMapper.java:29) ~[langchain4j-core-1.0.0.jar!/:?]
+	at dev.langchain4j.internal.RetryUtils.lambda$withRetryMappingExceptions$2(RetryUtils.java:324) ~[langchain4j-core-1.0.0.jar!/:?]
+	at dev.langchain4j.internal.RetryUtils$RetryPolicy.withRetry(RetryUtils.java:211) ~[langchain4j-core-1.0.0.jar!/:?]
+	at dev.langchain4j.internal.RetryUtils.withRetry(RetryUtils.java:264) ~[langchain4j-core-1.0.0.jar!/:?]
+	at dev.langchain4j.internal.RetryUtils.withRetryMappingExceptions(RetryUtils.java:324) ~[langchain4j-core-1.0.0.jar!/:?]
+	at dev.langchain4j.internal.RetryUtils.withRetryMappingExceptions(RetryUtils.java:308) ~[langchain4j-core-1.0.0.jar!/:?]
+	at dev.langchain4j.model.googleai.GoogleAiEmbeddingModel.embed(GoogleAiEmbeddingModel.java:72) ~[langchain4j-google-ai-gemini-1.0.0-beta5.jar!/:?]
+	at dev.langchain4j.model.googleai.GoogleAiEmbeddingModel.embed(GoogleAiEmbeddingModel.java:83) ~[langchain4j-google-ai-gemini-1.0.0-beta5.jar!/:?]
+	at com.codesage.domain.repos.service.embedding.SemanticSearchService.search(SemanticSearchService.java:36) ~[!/:1.0.0-SNAPSHOT]
+	at com.codesage.domain.chat.service.RepositoryChatService.executeRagFlow(RepositoryChatService.java:131) ~[!/:1.0.0-SNAPSHOT]
+	at com.codesage.domain.chat.service.RepositoryChatService.lambda$streamMessage$0(RepositoryChatService.java:122) ~[!/:1.0.0-SNAPSHOT]
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source) ~[?:?]
+	at java.base/java.util.concurrent.FutureTask.run(Unknown Source) ~[?:?]
+	at java.base/java.lang.VirtualThread.run(Unknown Source) [?:?]
+2026-06-08 12:40:49.693 [tomcat-handler-42] ERROR [] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.RuntimeException: HTTP error (400): {
+  "error": {
+    "code": 400,
+    "message": "API key not valid. Please pass a valid API key.",
+    "status": "INVALID_ARGUMENT",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+        "reason": "API_KEY_INVALID",
+        "domain": "googleapis.com",
+        "metadata": {
+          "service": "generativelanguage.googleapis.com"
+        }
+      },
+      {
+        "@type": "type.googleapis.com/google.rpc.LocalizedMessage",
+        "locale": "en-US",
+        "message": "API key not valid. Please pass a valid API key."
+      }
+    ]
+  }
+}
+] with root cause
+java.lang.RuntimeException: HTTP error (400): {
+  "error": {
+    "code": 400,
+    "message": "API key not valid. Please pass a valid API key.",
+    "status": "INVALID_ARGUMENT",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+        "reason": "API_KEY_INVALID",
+        "domain": "googleapis.com",
+        "metadata": {
+          "service": "generativelanguage.googleapis.com"
+        }
+      },
+      {
+        "@type": "type.googleapis.com/google.rpc.LocalizedMessage",
+        "locale": "en-US",
+        "message": "API key not valid. Please pass a valid API key."
+      }
+    ]
+  }
+}
+
+	at dev.langchain4j.model.googleai.GeminiService.sendRequest(GeminiService.java:69) ~[langchain4j-google-ai-gemini-1.0.0-beta5.jar!/:?]
+	at dev.langchain4j.model.googleai.GeminiService.embed(GeminiService.java:46) ~[langchain4j-google-ai-gemini-1.0.0-beta5.jar!/:?]
+	at dev.langchain4j.model.googleai.GoogleAiEmbeddingModel.lambda$embed$0(GoogleAiEmbeddingModel.java:72) ~[langchain4j-google-ai-gemini-1.0.0-beta5.jar!/:?]
+	at dev.langchain4j.internal.ExceptionMapper.withExceptionMapper(ExceptionMapper.java:29) ~[langchain4j-core-1.0.0.jar!/:?]
+	at dev.langchain4j.internal.RetryUtils.lambda$withRetryMappingExceptions$2(RetryUtils.java:324) ~[langchain4j-core-1.0.0.jar!/:?]
+	at dev.langchain4j.internal.RetryUtils$RetryPolicy.withRetry(RetryUtils.java:211) ~[langchain4j-core-1.0.0.jar!/:?]
+	at dev.langchain4j.internal.RetryUtils.withRetry(RetryUtils.java:264) ~[langchain4j-core-1.0.0.jar!/:?]
+	at dev.langchain4j.internal.RetryUtils.withRetryMappingExceptions(RetryUtils.java:324) ~[langchain4j-core-1.0.0.jar!/:?]
+	at dev.langchain4j.internal.RetryUtils.withRetryMappingExceptions(RetryUtils.java:308) ~[langchain4j-core-1.0.0.jar!/:?]
+	at dev.langchain4j.model.googleai.GoogleAiEmbeddingModel.embed(GoogleAiEmbeddingModel.java:72) ~[langchain4j-google-ai-gemini-1.0.0-beta5.jar!/:?]
+	at dev.langchain4j.model.googleai.GoogleAiEmbeddingModel.embed(GoogleAiEmbeddingModel.java:83) ~[langchain4j-google-ai-gemini-1.0.0-beta5.jar!/:?]
+	at com.codesage.domain.repos.service.embedding.SemanticSearchService.search(SemanticSearchService.java:36) ~[!/:1.0.0-SNAPSHOT]
+	at com.codesage.domain.chat.service.RepositoryChatService.executeRagFlow(RepositoryChatService.java:131) ~[!/:1.0.0-SNAPSHOT]
+	at com.codesage.domain.chat.service.RepositoryChatService.lambda$streamMessage$0(RepositoryChatService.java:122) ~[!/:1.0.0-SNAPSHOT]
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source) ~[?:?]
+	at java.base/java.util.concurrent.FutureTask.run(Unknown Source) ~[?:?]
+	at java.base/java.lang.VirtualThread.run(Unknown Source) [?:?]
+2026-06-08 12:40:49.695 [tomcat-handler-42] DEBUG [] org.springframework.security.web.FilterChainProxy - Securing POST /api/v1/chat/sessions/f177f87e-cefa-4ecd-b067-55b531e0c6b2/messages/stream
+2026-06-08 12:40:49.697 [tomcat-handler-42] DEBUG [] org.springframework.security.web.authentication.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2026-06-08 12:40:49.699 [tomcat-handler-42] ERROR [] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] threw exception
+org.springframework.security.authorization.AuthorizationDeniedException: Access Denied
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:99) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:125) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:119) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:91) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$0(ObservationFilterChainDecorator.java:323) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:224) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.web.filter.ServletRequestPathFilter.doFilter(ServletRequestPathFilter.java:52) ~[spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebSecurityConfiguration.java:319) ~[spring-security-config-6.5.0.jar!/:6.5.0]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:243) ~[spring-webmvc-6.2.7.jar!/:6.2.7]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:240) ~[spring-security-config-6.5.0.jar!/:6.5.0]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:362) ~[spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:278) ~[spring-web-6.2.7.jar!/:6.2.7]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.41.jar!/:?]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.7.jar!/:6.2.7]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.41.jar!/:?]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.2.7.jar!/:6.2.7]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.41.jar!/:?]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.2.7.jar!/:6.2.7]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.ApplicationDispatcher.invoke(ApplicationDispatcher.java:612) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.ApplicationDispatcher.doInclude(ApplicationDispatcher.java:491) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.ApplicationDispatcher.include(ApplicationDispatcher.java:439) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.StandardHostValve.custom(StandardHostValve.java:358) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.StandardHostValve.status(StandardHostValve.java:209) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.StandardHostValve.throwable(StandardHostValve.java:286) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:150) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.connector.CoyoteAdapter.asyncDispatch(CoyoteAdapter.java:239) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.coyote.AbstractProcessor.dispatch(AbstractProcessor.java:243) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:57) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1740) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) [tomcat-embed-core-10.1.41.jar!/:?]
+	at java.base/java.lang.VirtualThread.run(Unknown Source) [?:?]
+2026-06-08 12:40:49.701 [tomcat-handler-42] ERROR [] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost] - Exception Processing [ErrorPage[errorCode=0, location=/error]]
+jakarta.servlet.ServletException: Unable to handle the Spring Security Exception because the response is already committed.
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:143) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:119) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:91) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$0(ObservationFilterChainDecorator.java:323) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:224) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.web.filter.ServletRequestPathFilter.doFilter(ServletRequestPathFilter.java:52) ~[spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebSecurityConfiguration.java:319) ~[spring-security-config-6.5.0.jar!/:6.5.0]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:243) ~[spring-webmvc-6.2.7.jar!/:6.2.7]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:240) ~[spring-security-config-6.5.0.jar!/:6.5.0]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:362) ~[spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:278) ~[spring-web-6.2.7.jar!/:6.2.7]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.41.jar!/:?]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.2.7.jar!/:6.2.7]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.7.jar!/:6.2.7]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.41.jar!/:?]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.2.7.jar!/:6.2.7]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.41.jar!/:?]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.2.7.jar!/:6.2.7]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.ApplicationDispatcher.invoke(ApplicationDispatcher.java:612) ~[tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.ApplicationDispatcher.doInclude(ApplicationDispatcher.java:491) ~[tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.ApplicationDispatcher.include(ApplicationDispatcher.java:439) ~[tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.StandardHostValve.custom(StandardHostValve.java:358) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.StandardHostValve.status(StandardHostValve.java:209) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.StandardHostValve.throwable(StandardHostValve.java:286) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:150) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.catalina.connector.CoyoteAdapter.asyncDispatch(CoyoteAdapter.java:239) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.coyote.AbstractProcessor.dispatch(AbstractProcessor.java:243) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:57) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1740) [tomcat-embed-core-10.1.41.jar!/:?]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) [tomcat-embed-core-10.1.41.jar!/:?]
+	at java.base/java.lang.VirtualThread.run(Unknown Source) [?:?]
+Caused by: org.springframework.security.authorization.AuthorizationDeniedException: Access Denied
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:99) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:125) ~[spring-security-web-6.5.0.jar!/:6.5.0]
+	... 94 more

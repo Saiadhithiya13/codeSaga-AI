@@ -1,0 +1,78 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# CodeSage AI — Development Profile Configuration
+# Activated when: SPRING_PROFILES_ACTIVE=dev (default)
+# Credentials here are for LOCAL DOCKER COMPOSE ONLY — never production.
+# ─────────────────────────────────────────────────────────────────────────────
+
+spring:
+
+  # ─── PostgreSQL ────────────────────────────────────────────────────────────
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5433}/${DB_NAME:codesage_db}
+    username: ${DB_USERNAME:codesage_user}
+    password: ${DB_PASSWORD:codesage_dev_pass}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      pool-name: CodeSage-HikariCP-Dev
+      maximum-pool-size: 5
+      minimum-idle: 2
+      idle-timeout: 300000        # 5 min
+      connection-timeout: 20000   # 20 sec
+      max-lifetime: 1200000       # 20 min
+      connection-test-query: SELECT 1
+
+  # ─── JPA / Hibernate ───────────────────────────────────────────────────────
+  jpa:
+    hibernate:
+      ddl-auto: validate          # Flyway owns DDL; Hibernate validates only
+    show-sql: false               # Use log4j2 SQL logging instead
+    properties:
+      hibernate:
+        format_sql: true
+
+  # ─── Redis ─────────────────────────────────────────────────────────────────
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}  # No password in local dev by default
+      timeout: 2000ms
+      lettuce:
+        pool:
+          max-active: 5
+          max-idle: 3
+          min-idle: 1
+          max-wait: 1000ms
+
+  # ─── Flyway ────────────────────────────────────────────────────────────────
+  flyway:
+    baseline-on-migrate: true     # Safe for first-run on fresh DBs in dev
+
+# ─── Virtual Threads (Java 24) ───────────────────────────────────────────────
+# Architecture Spec: enable for repo indexing, GitHub sync, embedding, AI requests
+  threads:
+    virtual:
+      enabled: true
+
+# ─── Logging ─────────────────────────────────────────────────────────────────
+logging:
+  level:
+    com.codesage: DEBUG
+    org.springframework.web: INFO
+    org.springframework.security: DEBUG
+    org.flywaydb: INFO
+    org.hibernate.SQL: DEBUG
+    org.hibernate.orm.jdbc.bind: TRACE  # Log SQL parameter binding in dev
+
+# ─── App ─────────────────────────────────────────────────────────────────────
+app:
+  cors:
+    allowed-origins: http://localhost:5173,http://localhost:3000
+  cookie:
+    secure: false   # Allow HTTP for localhost development
+
+# ─── ChromaDB (ready for Sprint 5) ──────────────────────────────────────────
+chroma:
+  host: ${CHROMA_HOST:localhost}
+  port: ${CHROMA_PORT:8000}
+  collection-name: codesage_vectors
