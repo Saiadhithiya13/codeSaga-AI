@@ -46,8 +46,8 @@ public class SecurityConfig {
             
             // ─── Authorization Rules ──────────────────────────────────────────
             .authorizeHttpRequests(auth -> auth
-                // Allow async dispatches for SseEmitter
-                .dispatcherTypeMatchers(DispatcherType.ASYNC).permitAll()
+                // Allow async and error dispatches for SseEmitter (SSE streaming)
+                .dispatcherTypeMatchers(DispatcherType.ASYNC, DispatcherType.ERROR).permitAll()
                 // Public endpoints
                 .requestMatchers("/api/v1/health").permitAll()
                 .requestMatchers("/api/v1/auth/github/callback").permitAll()

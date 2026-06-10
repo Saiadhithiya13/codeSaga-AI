@@ -42,6 +42,8 @@
     <dependencyManagement>
         <dependencies>
             <!-- LangChain4j BOM — manages all lc4j module versions -->
+            <!-- Explicit Gemini exclusion: prevents transitive Gemini jar from landing on classpath -->
+            <!-- If Gemini jar is present, Spring Boot auto-configures GoogleAiEmbeddingModel which overrides Ollama -->
             <dependency>
                 <groupId>dev.langchain4j</groupId>
                 <artifactId>langchain4j-bom</artifactId>
@@ -133,10 +135,17 @@
             <artifactId>commons-pool2</artifactId>
         </dependency>
 
-        <!-- ─── LangChain4j (declared but AI services activated in Sprint 5) ─── -->
+        <!-- ─── LangChain4j (Ollama + Chroma only — NO Gemini) ─── -->
         <dependency>
             <groupId>dev.langchain4j</groupId>
             <artifactId>langchain4j</artifactId>
+            <exclusions>
+                <!-- Prevent any transitive Gemini dependency: causes GoogleAiEmbeddingModel auto-config -->
+                <exclusion>
+                    <groupId>dev.langchain4j</groupId>
+                    <artifactId>langchain4j-google-ai-gemini</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>dev.langchain4j</groupId>

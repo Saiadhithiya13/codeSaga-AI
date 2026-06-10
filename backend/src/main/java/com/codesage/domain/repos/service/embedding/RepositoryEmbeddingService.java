@@ -48,15 +48,17 @@ public class RepositoryEmbeddingService {
         processChunks(repositoryId, unembeddedChunks);
     }
 
-    @org.springframework.scheduling.annotation.Scheduled(fixedDelayString = "60000")
+    @org.springframework.scheduling.annotation.Scheduled(fixedDelayString = "${ai.embedding.retry-interval-ms:60000}")
     public void retryFailedEmbeddings() {
-        log.info("Running scheduled retry for pending and failed embeddings...");
         List<EmbeddingStatus> targetStatuses = List.of(EmbeddingStatus.PENDING, EmbeddingStatus.FAILED);
         List<CodeChunk> unembeddedChunks = codeChunkRepository.findByEmbeddingStatusIn(targetStatuses);
 
+        // Silent return when nothing to do — prevents log spam on empty systems
         if (unembeddedChunks.isEmpty()) {
             return;
         }
+
+        log.info("Running scheduled retry for {} pending/failed chunks...", unembeddedChunks.size());
 
         // Group by repository ID
         java.util.Map<UUID, List<CodeChunk>> grouped = unembeddedChunks.stream()

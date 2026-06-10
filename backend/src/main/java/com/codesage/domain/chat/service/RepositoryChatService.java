@@ -200,7 +200,7 @@ public class RepositoryChatService {
 
                 @Override
                 public void onError(Throwable error) {
-                    log.error("Error from Gemini streaming model", error);
+                    log.error("Error from Ollama streaming model", error);
                     try {
                         emitter.send(SseEmitter.event().name("error").data("Failed to generate response."));
                         emitter.completeWithError(error);

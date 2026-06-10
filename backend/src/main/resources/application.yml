@@ -12,6 +12,14 @@ spring:
   profiles:
     active: ${SPRING_PROFILES_ACTIVE:dev}
 
+  # Safety net: explicitly exclude Gemini auto-configuration.
+  # If the Gemini JAR is absent these are no-ops; if somehow present,
+  # this prevents GoogleAiEmbeddingModel from overriding our Ollama beans.
+  autoconfigure:
+    exclude:
+      - dev.langchain4j.autoconfigure.models.google.GoogleAiGeminiAutoConfiguration
+      - dev.langchain4j.autoconfigure.models.google.GoogleAiEmbeddingModelAutoConfiguration
+
   # ─── Jackson ───────────────────────────────────────────────────────────────
   jackson:
     default-property-inclusion: non_null
@@ -70,14 +78,17 @@ management:
   cache:
     type: redis
 
-# Sprint 5: AI & Embeddings
+# Sprint 5: AI & Embeddings (Ollama + ChromaDB — no Gemini)
 ai:
   ollama:
     base-url: ${AI_OLLAMA_BASE_URL:http://localhost:11434}
-    chat-model: ${AI_OLLAMA_CHAT_MODEL:llama3.1:8b}
+    chat-model: ${AI_OLLAMA_CHAT_MODEL:qwen3:8b}
     embedding-model: ${AI_OLLAMA_EMBEDDING_MODEL:nomic-embed-text}
   chroma:
-    url: ${CHROMA_URL}
+    # Default fallback for local dev; Docker sets CHROMA_URL=http://chromadb:8000
+    url: ${CHROMA_URL:http://localhost:8000}
+  embedding:
+    retry-interval-ms: 60000
   debt:
     large-file-threshold: 300
     deep-nesting-threshold: 4

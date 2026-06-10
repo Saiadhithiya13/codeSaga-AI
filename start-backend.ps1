@@ -21,6 +21,8 @@ app.github.client-id=$($envVars['GITHUB_CLIENT_ID'])
 app.github.client-secret=$($envVars['GITHUB_CLIENT_SECRET'])
 app.github.webhook-secret=$($envVars['GITHUB_WEBHOOK_SECRET'])
 spring.datasource.password=$($envVars['DB_PASSWORD'])
+ai.chroma.url=http://localhost:8000
+ai.ollama.base-url=http://localhost:11434
 "@
 
 $propsContent | Out-File -FilePath $localPropsFile -Encoding UTF8 -NoNewline

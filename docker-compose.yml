@@ -98,13 +98,13 @@ services:
       REDIS_PORT: 6379
       REDIS_PASSWORD: ""
 
-      CHROMA_HOST: chromadb
-      CHROMA_PORT: 8000
+      # Single URL env var — matches ChromaConfig.getChromaUrl() via ai.chroma.url
+      CHROMA_URL: http://chromadb:8000
 
       APP_CORS_ALLOWED_ORIGINS: ${APP_CORS_ALLOWED_ORIGINS:-http://localhost:5173,http://localhost:3000}
 
       AI_OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://ollama:11434}
-      AI_OLLAMA_CHAT_MODEL: ${OLLAMA_CHAT_MODEL:-llama3.1:8b}
+      AI_OLLAMA_CHAT_MODEL: ${OLLAMA_CHAT_MODEL:-qwen3:8b}
       AI_OLLAMA_EMBEDDING_MODEL: ${OLLAMA_EMBEDDING_MODEL:-nomic-embed-text}
       GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID:-}
       GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET:-}
@@ -124,6 +124,8 @@ services:
       redis:
         condition: service_healthy
       chromadb:
+        condition: service_healthy
+      ollama:
         condition: service_healthy
 
     healthcheck:
@@ -152,7 +154,8 @@ services:
     networks:
       - codesage_network
 
-  # Ollama
+  # Ollama — local LLM server
+  # On first start: pulls nomic-embed-text (sync) and qwen3:8b (background)
   ollama:
     image: ollama/ollama:latest
     container_name: codesage_ollama
@@ -161,8 +164,18 @@ services:
       - "${OLLAMA_PORT:-11434}:11434"
     volumes:
       - ollama_data:/root/.ollama
+      # Mount the entrypoint script that auto-pulls models
+      - ./docker/ollama/entrypoint.sh:/entrypoint.sh:ro
+    entrypoint: ["/bin/sh", "/entrypoint.sh"]
     networks:
       - codesage_network
+    healthcheck:
+      # Healthy once nomic-embed-text is available (pulled by entrypoint synchronously)
+      test: ["CMD", "sh", "-c", "ollama list | grep -q nomic-embed-text"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+      start_period: 120s
 
 networks:
   codesage_network:
