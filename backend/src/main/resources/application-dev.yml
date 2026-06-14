@@ -70,9 +70,3 @@ app:
     allowed-origins: http://localhost:5173,http://localhost:3000
   cookie:
     secure: false   # Allow HTTP for localhost development
-
-# ─── ChromaDB (ready for Sprint 5) ──────────────────────────────────────────
-chroma:
-  host: ${CHROMA_HOST:localhost}
-  port: ${CHROMA_PORT:8000}
-  collection-name: codesage_vectors

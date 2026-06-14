@@ -97,6 +97,16 @@ public class RepositoryEmbeddingService {
             }
         } catch (Exception e) {
             log.error("Error during parallel embedding generation for repository {}", repositoryId, e);
+            // Reset any chunks still stuck in PROCESSING back to FAILED so the retry scheduler picks them up.
+            // This happens when an exception escapes processBatch() before its own inner catch runs
+            // (e.g. during toTextSegment() with a lazy-loading issue outside a transaction).
+            unembeddedChunks.stream()
+                    .filter(c -> c.getEmbeddingStatus() == EmbeddingStatus.PROCESSING)
+                    .forEach(c -> {
+                        c.setEmbeddingStatus(EmbeddingStatus.FAILED);
+                        c.setLastError("Outer processing failure: " + e.getMessage());
+                    });
+            codeChunkRepository.saveAll(unembeddedChunks);
         }
 
         log.info("Finished embedding pipeline for repository {}", repositoryId);

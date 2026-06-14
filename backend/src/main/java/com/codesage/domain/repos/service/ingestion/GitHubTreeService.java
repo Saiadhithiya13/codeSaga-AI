@@ -16,6 +16,7 @@ import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.Semaphore;
 
 @Log4j2
 @Service
@@ -47,6 +48,11 @@ public class GitHubTreeService {
             treeResponse = gitHubClient.fetchRepositoryTree(accessToken, fullName, "master");
         }
 
+        // Check if tree was truncated by GitHub API (> 100,000 entries)
+        if (Boolean.TRUE.equals(treeResponse.getTruncated())) {
+            log.warn("Repository tree for {} was truncated by GitHub API. Some files may be missing.", fullName);
+        }
+
         Path tempDir = Files.createTempDirectory("codesage-" + fullName.replace("/", "-"));
         log.info("Created temp directory {} for {}", tempDir, fullName);
 
@@ -55,13 +61,22 @@ public class GitHubTreeService {
                 .filter(this::isSupported)
                 .toList();
 
+        // Throttle concurrent downloads to stay under GitHub's secondary rate limit.
+        // GitHub allows ~90 concurrent requests per token before returning 403.
+        final Semaphore semaphore = new Semaphore(20);
+
         try (ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor()) {
             List<Future<Void>> futures = items.stream()
                     .map(item -> executor.submit(() -> {
-                        String content = gitHubClient.fetchFileContent(accessToken, fullName, item.getSha());
-                        Path filePath = tempDir.resolve(item.getPath());
-                        Files.createDirectories(filePath.getParent());
-                        Files.writeString(filePath, content, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+                        semaphore.acquire();
+                        try {
+                            String content = gitHubClient.fetchFileContent(accessToken, fullName, item.getSha());
+                            Path filePath = tempDir.resolve(item.getPath());
+                            Files.createDirectories(filePath.getParent());
+                            Files.writeString(filePath, content, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+                        } finally {
+                            semaphore.release();
+                        }
                         return (Void) null;
                     }))
                     .toList();
