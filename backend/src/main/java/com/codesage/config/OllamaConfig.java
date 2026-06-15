@@ -24,8 +24,15 @@ import java.time.Duration;
  * <ul>
  *   <li>{@code ai.ollama.base-url}      — Ollama server URL (default: http://localhost:11434)</li>
  *   <li>{@code ai.ollama.embedding-model} — embedding model name (default: nomic-embed-text)</li>
- *   <li>{@code ai.ollama.chat-model}    — chat model name (default: qwen3:8b)</li>
+ *   <li>{@code ai.ollama.chat-model}    — chat model name (default: qwen2.5:7b)</li>
  * </ul>
+ *
+ * <p><strong>Note:</strong> {@code qwen3:8b} does not exist as a pullable Ollama
+ * tag. {@code qwen2.5:7b} is the validated default chat model for local dev.
+ * If you prefer a different model (e.g. {@code llama3:8b}), override via the
+ * {@code AI_OLLAMA_CHAT_MODEL} environment variable or {@code ai.ollama.chat-model}
+ * property — just make sure it has been pulled in your local Ollama instance
+ * ({@code ollama pull <model>}).
  */
 @Configuration
 public class OllamaConfig {
@@ -36,7 +43,7 @@ public class OllamaConfig {
     @Value("${ai.ollama.embedding-model:nomic-embed-text}")
     private String embeddingModelName;
 
-    @Value("${ai.ollama.chat-model:qwen3:8b}")
+    @Value("${ai.ollama.chat-model:qwen2.5:7b}")
     private String chatModelName;
 
     /**

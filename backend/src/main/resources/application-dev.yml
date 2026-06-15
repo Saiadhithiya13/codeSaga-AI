@@ -8,7 +8,7 @@ spring:
 
   # ─── PostgreSQL ────────────────────────────────────────────────────────────
   datasource:
-    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5433}/${DB_NAME:codesage_db}
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:codesage_db}
     username: ${DB_USERNAME:codesage_user}
     password: ${DB_PASSWORD:codesage_dev_pass}
     driver-class-name: org.postgresql.Driver
