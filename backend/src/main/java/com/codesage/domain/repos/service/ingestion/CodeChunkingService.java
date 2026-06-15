@@ -16,13 +16,15 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.UUID;
 
 /**
  * Service to chunk files deterministically.
+ *
+ * <p><strong>Threading note:</strong> chunk generation (pure CPU work) is done sequentially
+ * on the calling thread to avoid Hibernate session leakage across virtual threads.
+ * The {@code saveAll} call is performed inside a single {@code @Transactional} boundary
+ * so all chunks for the run are committed atomically.
  */
 @Log4j2
 @Service
@@ -35,38 +37,54 @@ public class CodeChunkingService {
     private static final int MAX_CHARS_PER_CHUNK = 2000;
     private static final int CHARS_PER_TOKEN_ESTIMATE = 4;
 
+    /**
+     * Chunks all files and persists all chunks in one transaction.
+     *
+     * @return the total number of chunks created
+     */
     @Transactional
-    public void chunkFiles(List<RepositoryFile> files, Path repoRoot) {
+    public int chunkFiles(List<RepositoryFile> files, Path repoRoot) {
         log.info("Starting chunking for {} files", files.size());
 
-        try (ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor()) {
-            List<Future<List<CodeChunk>>> futures = files.stream()
-                    .map(file -> executor.submit(() -> chunkFile(file, repoRoot)))
-                    .toList();
-
-            List<CodeChunk> allChunks = new ArrayList<>();
-            for (Future<List<CodeChunk>> future : futures) {
-                try {
-                    allChunks.addAll(future.get());
-                } catch (InterruptedException | ExecutionException e) {
-                    throw new RuntimeException("Failed to chunk file concurrently", e);
-                }
-            }
-
-            log.info("Generated {} chunks. Saving to database...", allChunks.size());
-            codeChunkRepository.saveAll(allChunks);
+        // Delete stale chunks for these files before re-chunking to prevent duplicates on re-index.
+        // ON DELETE CASCADE on repository_files → code_chunks handles this at the DB level when
+        // scanAndSaveFiles calls deleteByRepositoryId, but we guard here too for safety.
+        List<UUID> fileIds = files.stream()
+                .filter(f -> f.getId() != null)
+                .map(RepositoryFile::getId)
+                .toList();
+        if (!fileIds.isEmpty()) {
+            codeChunkRepository.deleteByRepositoryFileIdIn(fileIds);
         }
+
+        List<CodeChunk> allChunks = new ArrayList<>();
+
+        for (RepositoryFile file : files) {
+            try {
+                List<CodeChunk> chunks = chunkFile(file, repoRoot);
+                allChunks.addAll(chunks);
+            } catch (Exception e) {
+                // Log but continue — one bad file should not abort the whole indexing run
+                log.warn("Failed to chunk file {} — skipping. Cause: {}", file.getPath(), e.getMessage());
+            }
+        }
+
+        log.info("Generated {} chunks across {} files. Saving to database...", allChunks.size(), files.size());
+        codeChunkRepository.saveAll(allChunks);
+        log.info("Saved {} chunks.", allChunks.size());
+
+        return allChunks.size();
     }
 
     private List<CodeChunk> chunkFile(RepositoryFile file, Path repoRoot) throws IOException, NoSuchAlgorithmException {
         Path absolutePath = repoRoot.resolve(file.getPath());
         List<String> lines = Files.readAllLines(absolutePath, StandardCharsets.UTF_8);
-        
+
         List<CodeChunk> chunks = new ArrayList<>();
         StringBuilder currentChunkContent = new StringBuilder();
         int startLine = 1;
         int chunkIndex = 0;
-        
+
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
 
         for (int i = 0; i < lines.size(); i++) {
@@ -77,7 +95,7 @@ public class CodeChunkingService {
             if (currentChunkContent.length() >= MAX_CHARS_PER_CHUNK || i == lines.size() - 1) {
                 String content = currentChunkContent.toString();
                 byte[] hashBytes = digest.digest(content.getBytes(StandardCharsets.UTF_8));
-                
+
                 CodeChunk chunk = CodeChunk.builder()
                         .repositoryFile(file)
                         .chunkIndex(chunkIndex++)
@@ -87,9 +105,9 @@ public class CodeChunkingService {
                         .contentHash(bytesToHex(hashBytes))
                         .tokenEstimate(content.length() / CHARS_PER_TOKEN_ESTIMATE)
                         .build();
-                        
+
                 chunks.add(chunk);
-                
+
                 // Reset for next chunk
                 currentChunkContent.setLength(0);
                 startLine = i + 2;
@@ -106,4 +124,5 @@ public class CodeChunkingService {
         }
         return sb.toString();
     }
+
 }

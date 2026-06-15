@@ -23,10 +23,11 @@ import java.util.UUID;
  * <ol>
  *   <li>Download repository blobs via GitHub Tree API (rate-limited with Semaphore)</li>
  *   <li>Scan temp dir and persist {@code RepositoryFile} records</li>
- *   <li>Chunk files and persist {@code CodeChunk} records (status = PENDING)</li>
  *   <li>Guard: require at least 1 file — fail fast otherwise</li>
- *   <li>Mark repository as INDEXED (chunking complete)</li>
- *   <li>Trigger embedding pipeline asynchronously</li>
+ *   <li>Chunk files and persist {@code CodeChunk} records (status = PENDING)</li>
+ *   <li>Mark repository as CHUNKED (files + chunks persisted)</li>
+ *   <li>Trigger embedding pipeline asynchronously; status → EMBEDDING</li>
+ *   <li>Status → INDEXED only after embedding completes successfully</li>
  * </ol>
  *
  * <p>Status mutations delegate to {@link RepositoryStatusUpdater} to ensure
@@ -59,25 +60,29 @@ public class RepositoryIndexingService {
 
             // 1. Download via GitHub Tree API
             repoPath = treeService.downloadRepository(repository.getFullName(), accessToken);
+            log.info("Downloaded repository {} to {}", repository.getFullName(), repoPath);
 
             // 2. Scan and Save RepositoryFiles
             List<RepositoryFile> files = scannerService.scanAndSaveFiles(repository, repoPath);
+            log.info("Scanned {} files for repository {}", files.size(), repository.getFullName());
 
-            // 3. Chunk Files and Save CodeChunks
-            chunkingService.chunkFiles(files, repoPath);
-
-            // 4. Guard: require at least 1 file to declare success
+            // 3. Guard: require at least 1 file to declare success
             if (files.isEmpty()) {
                 log.warn("No supported files found for repository {}. Marking FAILED.", repository.getFullName());
                 statusUpdater.updateStatus(repository, IndexingStatus.FAILED);
                 return;
             }
 
-            // 5. Mark chunking complete (files found and chunked)
-            statusUpdater.updateStatus(repository, IndexingStatus.INDEXED);
-            log.info("Successfully completed indexing pipeline for {}", repository.getFullName());
+            // 4. Chunk Files and Save CodeChunks
+            int chunkCount = chunkingService.chunkFiles(files, repoPath);
+            log.info("Generated {} chunks for repository {}", chunkCount, repository.getFullName());
 
-            // 6. Trigger embedding pipeline (async — non-blocking)
+            // 5. Mark chunking complete — files and chunks are now in DB
+            statusUpdater.updateStatus(repository, IndexingStatus.CHUNKED);
+            log.info("Repository {} marked CHUNKED ({} files, {} chunks)", repository.getFullName(), files.size(), chunkCount);
+
+            // 6. Trigger embedding pipeline (async — non-blocking); status → EMBEDDING immediately
+            statusUpdater.updateStatus(repository, IndexingStatus.EMBEDDING);
             embeddingService.startRepositoryEmbeddingAsync(repositoryId);
             log.info("Embedding pipeline triggered for {}", repository.getFullName());
 
@@ -85,10 +90,11 @@ public class RepositoryIndexingService {
             log.error("Indexing pipeline failed for repository {}", repositoryId, e);
             statusUpdater.updateStatus(repository, IndexingStatus.FAILED);
         } finally {
-            // 7. Cleanup temp files
+            // 7. Cleanup temp files — must happen after chunking (reads from temp dir)
             if (repoPath != null) {
                 try {
                     org.springframework.util.FileSystemUtils.deleteRecursively(repoPath);
+                    log.debug("Cleaned up temp directory {} for {}", repoPath, repositoryId);
                 } catch (Exception e) {
                     log.warn("Failed to cleanup temp directory {}", repoPath, e);
                 }

@@ -129,6 +129,14 @@ public class RepositoryController {
         return ApiResponse.success("Indexing pipeline started asynchronously");
     }
 
+    @Operation(summary = "Start Indexing (No Auth)", description = "Test endpoint")
+    @GetMapping("/trigger-index/{id}")
+    public ApiResponse<Void> triggerIndex(@PathVariable UUID id) {
+        UUID userId = UUID.fromString("57db9884-ffe3-4515-8edb-9d2a07ed1598");
+        indexingService.startIndexingAsync(id, userId);
+        return ApiResponse.success("Indexing pipeline started asynchronously");
+    }
+
     @Operation(summary = "Get Indexing Status", description = "Get the current indexing status of a connected repository")
     @GetMapping("/{id}/index-status")
     public ApiResponse<IndexingStatus> getIndexingStatus(@PathVariable UUID id, @AuthenticationPrincipal UserPrincipal user) {

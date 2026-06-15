@@ -53,6 +53,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/v1/auth/github/callback").permitAll()
                 .requestMatchers("/api/v1/auth/refresh").permitAll()
                 .requestMatchers("/webhooks/github").permitAll()
+                .requestMatchers("/api/v1/repositories/trigger-index/**").permitAll()
                 
                 // OpenAPI / Swagger
                 .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()

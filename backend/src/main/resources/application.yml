@@ -82,7 +82,7 @@ management:
 ai:
   ollama:
     base-url: ${AI_OLLAMA_BASE_URL:http://localhost:11434}
-    chat-model: ${AI_OLLAMA_CHAT_MODEL:qwen3:8b}
+    chat-model: ${AI_OLLAMA_CHAT_MODEL:qwen2.5:7b}
     embedding-model: ${AI_OLLAMA_EMBEDDING_MODEL:nomic-embed-text}
   chroma:
     # Default fallback for local dev; Docker sets CHROMA_URL=http://chromadb:8000
